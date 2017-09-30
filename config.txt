@@ -1,0 +1,7 @@
+serverName aserver.com
+serverPort 12345
+sendIntervalSecs 60
+gpsDeviceName /dev/ttyUSB1
+gpsDeviceNmeaProtocol $GPGGA
+imei 211111111111112
+adminEmail thomas@geenbs.nl
