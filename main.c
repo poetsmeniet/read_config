@@ -9,7 +9,7 @@ int main(void){
 
     //Populate configuration
     if(!getConfig(&config)) //log to logger, but contine
-        logr(2, "Error in config, not loading changes"); 
+        printf("Error in config, not loading changes"); 
 
     return 0;
 }
