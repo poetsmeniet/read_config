@@ -24,7 +24,7 @@ freely, subject to the following restrictions:
 #include <string.h>
 #include "config.h"
 #define CONFIGFILE "config.txt"
-#define MAXLEN 50 
+#define MAXLEN 500 
 
 //A quick write for a simple configuration file
 extern int getConfig(appConfig *config){
@@ -38,12 +38,16 @@ extern int getConfig(appConfig *config){
             char sKey[MAXLEN];
             char sVal[MAXLEN];
 
-            fscanf(fp, "%s %s\n", &sKey[0], sVal);
+            fscanf(fp, "%s %99[^\n]\n", &sKey[0], sVal);
 
             size_t keyLen = strlen(sKey) + 1;
             size_t valLen = strlen(sVal) + 1;
             if(keyLen > MAXLEN || valLen > MAXLEN){
                return 0;
+            }
+            
+            if(bcmp(&sKey[0], &"sentence1", 9) == 0){
+               memcpy(config->sentence1, &sVal, valLen);
             }
             
             if(bcmp(&sKey[0], &"serverName", 10) == 0){

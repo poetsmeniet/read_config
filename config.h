@@ -31,6 +31,7 @@ typedef struct applicationConfguration{
     char gpsDeviceNmeaProtocol[100];
     long long int imei;
     char adminEmail[50];
+    char sentence1[500];
 }appConfig;
 
 int getConfig(appConfig *config);
