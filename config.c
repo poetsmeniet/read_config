@@ -48,10 +48,12 @@ extern int getConfig(appConfig *config, char *filename){
             
             if(bcmp(&sKey[0], &"sentence1", 9) == 0){
                memcpy(config->sentence1, &sVal, valLen);
+               config->sentence1[valLen] = '\0';
             }
             
             if(bcmp(&sKey[0], &"serverName", 10) == 0){
                memcpy(config->serverName, &sVal, valLen);
+               config->serverName[valLen] = '\0';
             }
             if(bcmp(&sKey[0], &"serverPort", 10) == 0){
                config->serverPort =(int)strtol(sVal, (char **)NULL, 10);
@@ -61,15 +63,18 @@ extern int getConfig(appConfig *config, char *filename){
             }
             if(bcmp(&sKey[0], &"gpsDeviceName", 13) == 0){
                memcpy(config->gpsDeviceName, &sVal, valLen);
+               config->gpsDeviceName[valLen] = '\0';
             }
             if(bcmp(&sKey[0], &"gpsDeviceNmeaProtocol", 21) == 0){
                memcpy(config->gpsDeviceNmeaProtocol, &sVal, valLen);
+               config->gpsDeviceNmeaProtocol[valLen] = '\0';
             }
             if(bcmp(&sKey[0], &"imei", 4) == 0){
                config->imei = (long long int)strtoll(sVal, (char **)NULL, 10);
             }
             if(bcmp(&sKey[0], &"adminEmail", 10) == 0){
                memcpy(config->adminEmail, &sVal, valLen);
+               config->adminEmail[valLen] = '\0';
             }
         }
     }else{
