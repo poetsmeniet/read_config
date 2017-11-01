@@ -8,7 +8,7 @@ int main(void){
     appConfig config;
 
     //Populate configuration
-    if(!getConfig(&config)) //log to logger, but contine
+    if(!getConfig(&config)) //log to logger, but continue
         printf("Error in config, not loading changes"); 
 
     return 0;
