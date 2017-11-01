@@ -23,14 +23,13 @@ freely, subject to the following restrictions:
 #include <stdlib.h>
 #include <string.h>
 #include "config.h"
-#define CONFIGFILE "config.txt"
 #define MAXLEN 500 
 
 //A quick write for a simple configuration file
-extern int getConfig(appConfig *config){
+extern int getConfig(appConfig *config, char *filename){
     size_t lineNr = 0;
     FILE *fp;
-    fp = fopen(CONFIGFILE, "r");
+    fp = fopen(filename, "r");
 
     if(fp != NULL){
         while(!feof(fp)){
@@ -43,7 +42,8 @@ extern int getConfig(appConfig *config){
             size_t keyLen = strlen(sKey) + 1;
             size_t valLen = strlen(sVal) + 1;
             if(keyLen > MAXLEN || valLen > MAXLEN){
-               return 0;
+               printf("\nSorry, maximum length of key value exceeded (%d)\n", MAXLEN);
+               return 1;
             }
             
             if(bcmp(&sKey[0], &"sentence1", 9) == 0){
@@ -74,7 +74,8 @@ extern int getConfig(appConfig *config){
         }
     }else{
         //Pocess error
-        return 0;
+        return 1;
     }
-    return 1;
+    fclose(fp);
+    return 0;
 }

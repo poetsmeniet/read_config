@@ -34,6 +34,6 @@ typedef struct applicationConfguration{
     char sentence1[500];
 }appConfig;
 
-int getConfig(appConfig *config);
+extern int getConfig(appConfig *config, char *filename);
 
 #endif

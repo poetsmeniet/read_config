@@ -2,14 +2,17 @@
 #include <unistd.h>
 #include "config.h"
 #define LOGFILE "/tmp/logile.log"
+#define CONFIG_FILENAME "config.txt"
 
 int main(void){
     //Define configuration struct 
     appConfig config;
 
     //Populate configuration
-    if(!getConfig(&config)) //log to logger, but continue
-        printf("Error in config, not loading changes"); 
+    if(getConfig(&config, CONFIG_FILENAME)){
+        printf("Error in config\n"); 
+        return 1;
+    }
 
     printf("serverName: %s\n", config.serverName);
     printf("Sentence1 (with whitespaces): %s\n", config.sentence1);
