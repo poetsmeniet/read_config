@@ -26,10 +26,10 @@ freely, subject to the following restrictions:
 #define MAXLEN 500 
 
 //A quick write for a simple configuration file
-extern int getConfig(appConfig *config, char *filename){
+extern int getConfig(appConfig *config, char *fileName){
     size_t lineNr = 0;
     FILE *fp;
-    fp = fopen(filename, "r");
+    fp = fopen(fileName, "r");
 
     if(fp != NULL){
         while(!feof(fp)){
@@ -37,7 +37,11 @@ extern int getConfig(appConfig *config, char *filename){
             char sKey[MAXLEN];
             char sVal[MAXLEN];
 
-            fscanf(fp, "%s %99[^\n]\n", &sKey[0], sVal);
+            int rc = fscanf(fp, "%s %99[^\n]\n", &sKey[0], sVal);
+            if(rc == 0){
+                printf("\tError in '%s', line number %d\n", fileName, lineNr);
+                return -1;
+            }
 
             size_t keyLen = strlen(sKey) + 1;
             size_t valLen = strlen(sVal) + 1;
