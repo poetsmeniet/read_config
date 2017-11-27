@@ -26,12 +26,8 @@ freely, subject to the following restrictions:
 typedef struct applicationConfguration{
     char serverName[200];
     int serverPort;
-    size_t sendIntervalSecs;
-    char gpsDeviceName[100];
-    char gpsDeviceNmeaProtocol[100];
-    long long int imei;
-    char adminEmail[50];
-    char sentence1[500];
+    char nick[200];
+    char userName[200];
 }appConfig;
 
 extern int getConfig(appConfig *config, char *filename);

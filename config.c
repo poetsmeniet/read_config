@@ -26,10 +26,10 @@ freely, subject to the following restrictions:
 #define MAXLEN 500 
 
 //A quick write for a simple configuration file
-extern int getConfig(appConfig *config, char *fileName){
+extern int getConfig(appConfig *config, char *filename){
     size_t lineNr = 0;
     FILE *fp;
-    fp = fopen(fileName, "r");
+    fp = fopen(filename, "r");
 
     if(fp != NULL){
         while(!feof(fp)){
@@ -39,7 +39,7 @@ extern int getConfig(appConfig *config, char *fileName){
 
             int rc = fscanf(fp, "%s %99[^\n]\n", &sKey[0], sVal);
             if(rc == 0){
-                printf("\tError in '%s', line number %d\n", fileName, lineNr);
+                printf("\tError in '%s', line number %d\n", filename, lineNr);
                 return -1;
             }
 
@@ -50,35 +50,19 @@ extern int getConfig(appConfig *config, char *fileName){
                return 1;
             }
             
-            if(bcmp(&sKey[0], &"sentence1", 9) == 0){
-               memcpy(config->sentence1, &sVal, valLen);
-               config->sentence1[valLen] = '\0';
-            }
-            
             if(bcmp(&sKey[0], &"serverName", 10) == 0){
                memcpy(config->serverName, &sVal, valLen);
-               config->serverName[valLen] = '\0';
             }
             if(bcmp(&sKey[0], &"serverPort", 10) == 0){
                config->serverPort =(int)strtol(sVal, (char **)NULL, 10);
             }
-            if(bcmp(&sKey[0], &"sendIntervalSecs", 16) == 0){
-               config->sendIntervalSecs =(int)strtol(sVal, (char **)NULL, 10);
+            if(bcmp(&sKey[0], &"nick", 4) == 0){
+               memcpy(config->nick, &sVal, valLen);
+               config->nick[valLen] = '\0';
             }
-            if(bcmp(&sKey[0], &"gpsDeviceName", 13) == 0){
-               memcpy(config->gpsDeviceName, &sVal, valLen);
-               config->gpsDeviceName[valLen] = '\0';
-            }
-            if(bcmp(&sKey[0], &"gpsDeviceNmeaProtocol", 21) == 0){
-               memcpy(config->gpsDeviceNmeaProtocol, &sVal, valLen);
-               config->gpsDeviceNmeaProtocol[valLen] = '\0';
-            }
-            if(bcmp(&sKey[0], &"imei", 4) == 0){
-               config->imei = (long long int)strtoll(sVal, (char **)NULL, 10);
-            }
-            if(bcmp(&sKey[0], &"adminEmail", 10) == 0){
-               memcpy(config->adminEmail, &sVal, valLen);
-               config->adminEmail[valLen] = '\0';
+            if(bcmp(&sKey[0], &"userName", 8) == 0){
+               memcpy(config->userName, &sVal, valLen);
+               config->userName[valLen] = '\0';
             }
         }
     }else{
