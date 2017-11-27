@@ -39,7 +39,7 @@ extern int getConfig(appConfig *config, char *filename){
 
             int rc = fscanf(fp, "%s %99[^\n]\n", &sKey[0], sVal);
             if(rc == 0){
-                printf("\tError in '%s', line number %d\n", filename, lineNr);
+                printf("\tError in '%s', line number %zu\n", filename, lineNr);
                 return -1;
             }
 
